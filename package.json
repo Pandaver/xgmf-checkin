@@ -1,0 +1,24 @@
+{
+  "name": "xgmf-checkin",
+  "version": "1.0.0",
+  "description": "学工魔方每日健康情况填报",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pandaver/xgmf-checkin.git"
+  },
+  "author": "Pandaver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pandaver/xgmf-checkin/issues"
+  },
+  "homepage": "https://github.com/Pandaver/xgmf-checkin#readme",
+  "dependencies": {
+    "axios": "^1.1.2",
+    "https-proxy-agent": "^5.0.1",
+    "properties-reader": "^2.2.0"
+  }
+}

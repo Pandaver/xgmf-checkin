@@ -1,0 +1,25 @@
+name: 功能提案
+description: 提交新功能提案。
+title: "[feature]: "
+labels: ["enhancement"]
+assignees:
+  - DullSword
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您抽出宝贵时间提出新功能！
+  - type: textarea
+    id: feature-proposal
+    attributes:
+      label: 功能提案
+      description: 对功能的清晰简洁描述。
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 动机
+      description: 概述您提出提案的动机。它将如何让 xgmf-checkin 变得更好？
+    validations:
+      required: true

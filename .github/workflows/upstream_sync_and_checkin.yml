@@ -1,0 +1,56 @@
+name: 'Upstream Sync And Checkin'
+
+on:
+  schedule:
+    - cron:  '16 1 * * *'
+  watch:
+    # Star触发
+    types: [ started ]
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'images/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Sync latest commits from upstream repo
+
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Sync upstream changes
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.0
+        with:
+          target_sync_branch: master
+          upstream_sync_branch: master
+          upstream_sync_repo: Pandaver/xgmf-checkin
+          upstream_pull_args: '--allow-unrelated-histories'
+          test_mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Random sleep
+        if: github.event_name == 'schedule'
+        run: sleep $(shuf -i 10-300 -n 1)
+
+      - name: NPM install
+        run: npm install
+
+      - name: Run checkin
+        run: node ./index.js '${{ secrets.CONFIG }}'
+        env:
+          CONFIG: ${{ secrets.CONFIG }}
+
+      - name: Keep action alive
+        uses: gautamkrishnar/keepalive-workflow@master
