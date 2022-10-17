@@ -43,7 +43,6 @@ async function main() {
   }
   coordShift()
   const address = await getAddrByCoord(coord)
-  console.log('地址：' + address + '|' + coord)
   console.log('当天体温：' + temperature)
   const data = {
     'form_id': '45',
