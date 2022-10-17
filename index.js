@@ -62,7 +62,7 @@ async function main() {
   if (html.indexOf('新增成功') >= 0) {
     console.info('填报成功')
     const successContent = fs.readFileSync(path.resolve(__dirname, './success.html'), 'utf-8').toString()
-    await pushplus(pushplusToken, successContent)
+    await pushplus(pushplusToken, successContent, '学工魔方：填报成功')
   } else {
     console.error('填报失败')
     let desc = html.match(/<div class="desc">(.*?)<\/div>/)[1]
@@ -76,7 +76,7 @@ async function main() {
     let svg404 = fs.readFileSync(path.resolve(__dirname, './404.svg'), 'utf-8').toString()
     svg404 = encodeSvg(svg404)
     html = html.replace('<img src="//c.d8n.cn/res/img/icon/404.svg', '<img src="' + svg404)
-    await pushplus(pushplusToken, html)
+    await pushplus(pushplusToken, html, '学工魔方：填报失败')
   }
 }
 
@@ -164,17 +164,18 @@ async function checkin(data) {
  * pushplus推送
  * @param token pushplus token
  * @param content 推送内容
+ * @param title 推送标题
  * @returns {Promise<void>}
  */
-async function pushplus(token, content) {
+async function pushplus(token, content, title) {
   if (token) {
     const res = await axios({
       method: 'post',
       url: 'http://www.pushplus.plus/send',
       data: {
         token,
-        title: '学工魔方签到',
-        content: content
+        title,
+        content
       }
     })
     if (res.data.code !== 200) {
