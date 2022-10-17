@@ -14,10 +14,9 @@ on:
       - 'images/**'
 
 jobs:
-  build:
+  upstream_sync:
     runs-on: ubuntu-latest
     name: Sync latest commits from upstream repo
-
     steps:
       - name: Checkout target repo
         uses: actions/checkout@v3
@@ -34,6 +33,13 @@ jobs:
           upstream_sync_repo: Pandaver/xgmf-checkin
           upstream_pull_args: '--allow-unrelated-histories'
           test_mode: false
+
+  checkin:
+    runs-on: ubuntu-latest
+    name: XGMF Checkin
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
