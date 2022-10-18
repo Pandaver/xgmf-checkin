@@ -136,6 +136,8 @@ Secret填完一个参数回车换一行
 <div align=center>
 	<img src="https://cdn.jsdelivr.net/gh/Pandaver/xgmf-checkin/images/enable_actions.png">
 </div>
+
+
 再点击仓库右上角的⭐**Star** 代码就会运行一次了
 
 <div align=center>
